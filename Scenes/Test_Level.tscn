@@ -8,8 +8,10 @@
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, -3230 )
+z_index = 99
 
 [node name="Planet" parent="." instance=ExtResource( 1 )]
+z_index = -99
 
 [node name="Test_Ball" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4847.2, -2758.69 )

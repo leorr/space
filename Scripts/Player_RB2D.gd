@@ -15,13 +15,9 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	current_gravity = get_position() - planets[0].get_position()
-	#print(current_gravity)
-	#if Input.is_action_just_pressed("ui_jump"):
-	#	apply_central_impulse(current_gravity*80) this is shit currently
 	#i should only do those after i check if the player is landed
 	set_linear_velocity(motion)
 	rotate(current_gravity.angle_to(Vector2(0,-1))*-1)
-
 	
 func _handle_move_input():
 	motion = Vector2(0,0)
