@@ -4,8 +4,10 @@
 [ext_resource path="res://Scripts/Gravity.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
+friction = 0.1
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 865.141
 
 [sub_resource type="CircleShape2D" id=3]
 
@@ -17,11 +19,9 @@ mass = 65535.0
 physics_material_override = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 6, 6 )
 texture = ExtResource( 1 )
 
 [node name="Solid_Area" type="CollisionShape2D" parent="."]
-scale = Vector2( 307.2, 307.2 )
 z_index = -99
 shape = SubResource( 2 )
 
@@ -36,5 +36,5 @@ angular_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="Gravity_Area" type="CollisionShape2D" parent="Gravity"]
-scale = Vector2( 6180, 6180 )
+scale = Vector2( 4000, 4000 )
 shape = SubResource( 3 )

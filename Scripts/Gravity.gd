@@ -13,5 +13,5 @@ extends Area2D
 #func _on_Gravity_body_entered(body):
 #	objects.append(body)
 func _ready():
-	set_gravity(100000)
-	set_gravity_distance_scale(0.001)
+	set_gravity(20000)
+	set_gravity_distance_scale(0.0001)
