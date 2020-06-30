@@ -38,18 +38,17 @@ mode = 2
 mass = 80.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 8.0
+continuous_cd = 1
 contacts_reported = 10
 contact_monitor = true
+can_sleep = false
 linear_damp = 0.1
 script = ExtResource( 8 )
-run_speed = null
-air_speed = null
-jump_force = null
 
 [node name="anim_player" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Walking"
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

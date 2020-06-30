@@ -8,6 +8,9 @@
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 2601.73, -705.212 )
 z_index = 99
+run_speed = 400.0
+air_speed = 10.0
+jump_force = 500.0
 
 [node name="Planet2" parent="." instance=ExtResource( 1 )]
 show_behind_parent = true
