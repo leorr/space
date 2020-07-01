@@ -1,19 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Test_Ball.tscn" type="PackedScene" id=3]
 
 [node name="Root" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 2601.73, -705.212 )
-z_index = 99
-run_speed = 400.0
-air_speed = 10.0
-jump_force = 500.0
+[node name="Planet" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2650.4, -659.921 )
 
-[node name="Planet2" parent="." instance=ExtResource( 1 )]
-show_behind_parent = true
-light_mask = 2
-position = Vector2( 2620.64, 433.413 )
-z_index = -4096
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2611.02, -1689.95 )
+
+[node name="Test_Ball" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2400.71, -1757.83 )

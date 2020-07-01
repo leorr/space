@@ -8,21 +8,15 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Node",
-"class": "StateMachine",
-"language": "GDScript",
-"path": "res://Scripts/State_Machine.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"StateMachine": ""
+
 }
 
 [application]
 
 config/name="space"
 run/main_scene="res://Scenes/Test_Level.tscn"
-run/low_processor_mode=true
 
 [importer_defaults]
 
@@ -57,6 +51,8 @@ ui_jump={
 
 [physics]
 
+common/physics_fps=240
+common/physics_jitter_fix=0.25
 2d/physics_engine="GodotPhysics"
 2d/thread_model=2
 2d/default_gravity_vector=Vector2( 0, 0 )
@@ -64,11 +60,9 @@ ui_jump={
 [rendering]
 
 quality/driver/driver_name="GLES2"
-quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation=1
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
 threads/thread_model=2
-quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0.00392157, 0.14902, 1 )
 environment/default_environment="res://default_env.tres"
 quality/filters/anisotropic_filter_level=1

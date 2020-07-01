@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/player/Walking5.png" type="Texture" id=16]
 
 [sub_resource type="PhysicsMaterial" id=1]
+absorbent = true
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -31,14 +32,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=3]
 
 [node name="Player" type="RigidBody2D"]
 mode = 2
 mass = 80.0
 physics_material_override = SubResource( 1 )
-gravity_scale = 8.0
-continuous_cd = 1
 contacts_reported = 10
 contact_monitor = true
 can_sleep = false
@@ -50,9 +49,10 @@ frames = SubResource( 2 )
 animation = "Walking"
 frame = 6
 playing = true
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3, 3 )
+position = Vector2( 0, 6 )
 shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
