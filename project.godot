@@ -51,8 +51,8 @@ ui_jump={
 
 [physics]
 
-common/physics_fps=240
-common/physics_jitter_fix=0.25
+common/physics_fps=120
+common/physics_jitter_fix=1.0
 2d/physics_engine="GodotPhysics"
 2d/thread_model=2
 2d/default_gravity_vector=Vector2( 0, 0 )
