@@ -2,20 +2,24 @@ extends RigidBody2D
 
 onready var planets = get_tree().get_nodes_in_group("Planet")
 onready var animator = get_node("anim_player")
+onready var timer = get_node("Timer")
 
 enum{
 	IDLE,
 	RUN,
+	JUMP,
 }
 
 onready var _transitions: = {
 	IDLE:[RUN],
-	RUN:[IDLE],
+	RUN:[IDLE,JUMP],
+	JUMP:[RUN],
 }
 
-export var run_speed := 4000.0
+export var impulse_speed := 4000.0
+export var max_speed := 100.0
 export var air_speed := 10.0
-export var jump_force := 500.0
+export var jump_force := 20000.0
 
 var _state: int = IDLE
 var _pstate: int = 99
@@ -25,14 +29,14 @@ var flip : bool = false
 var states_strings := {
 	IDLE: "idle",
 	RUN: "run",
+	JUMP: "jump",
 }
 
-func _process(_delta):
+func _process(_delta) -> void:
 	move_direction = get_move_direction()
-	set_flip()
 	
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
-	#var grounded := state.get_contact_count() > 0
+	var grounded := state.get_contact_count() > 0
 	#print("pstate:", _pstate , " state:", _state, "\n")
 	rotate((get_position() - planets[0].get_position()).normalized().angle_to(Vector2(0,-1))*-1)
 	match _state:
@@ -40,12 +44,23 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 			if move_direction:
 				change_state(RUN)
 		RUN:
+			set_flip()
 			if not move_direction:
 				change_state(IDLE)
-			elif linear_velocity.length() < 100:
-				state.apply_central_impulse(move_direction*run_speed*0.5)
+			if (grounded) and Input.is_action_just_pressed("ui_jump"):
+				state.apply_central_impulse( (get_linear_velocity().normalized()*0.3 + (get_position() - planets[0].get_position()).normalized()) *jump_force)
+				timer.start()
+				change_state(JUMP)
+				#current grounded is unreliable
+				pass
+			elif linear_velocity.length() < max_speed:
+				state.apply_central_impulse(move_direction*impulse_speed)
+		JUMP:
+			if grounded && timer.is_stopped():
+				change_state(RUN)
 		
 func change_state(target_state: int) -> void:
+	#change state only to diferent states
 	if (not target_state in _transitions[_state]) or _pstate == _state:
 		return
 	_pstate = _state
@@ -65,8 +80,8 @@ func get_move_direction() -> Vector2:
 
 func set_flip() -> void:
 	if Input.is_action_pressed("ui_left"):
-		flip=1
+		flip=true
 	elif Input.is_action_pressed("ui_right"): 
-		flip=0
+		flip=false
 	animator.set_flip_h(flip)
 	return

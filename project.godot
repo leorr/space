@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="space"
 run/main_scene="res://Scenes/Test_Level.tscn"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [importer_defaults]
 
 texture={
