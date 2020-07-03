@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Lamp-.png" type="Texture" id=1]
-[ext_resource path="res://Assets/light-export.png" type="Texture" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=2]
+
 
 [node name="Lamp" type="Sprite"]
 position = Vector2( 2777.04, -1602.16 )

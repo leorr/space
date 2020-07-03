@@ -3,6 +3,8 @@ extends RigidBody2D
 onready var planets = get_tree().get_nodes_in_group("Planet")
 onready var animator = get_node("anim_player")
 onready var timer = get_node("Timer")
+onready var shadow = get_node("cast_shadow")
+onready var gravity : Vector2 = (get_position() - planets[0].get_position()).normalized()
 
 enum{
 	IDLE,
@@ -18,7 +20,6 @@ onready var _transitions: = {
 
 export var impulse_speed := 4000.0
 export var max_speed := 100.0
-export var air_speed := 10.0
 export var jump_force := 20000.0
 
 var _state: int = IDLE
@@ -33,12 +34,13 @@ var states_strings := {
 }
 
 func _process(_delta) -> void:
-	move_direction = get_move_direction()
+	gravity = (get_position() - planets[0].get_position()).normalized()
+	move_direction = get_move_direction(gravity)
 	
 func _integrate_forces(state: Physics2DDirectBodyState) -> void:
-	var grounded := state.get_contact_count() > 0
+	var grounded : bool = state.get_contact_count() > 0
 	#print("pstate:", _pstate , " state:", _state, "\n")
-	rotate((get_position() - planets[0].get_position()).normalized().angle_to(Vector2(0,-1))*-1)
+	rotate(gravity.angle_to(Vector2(0,-1))*-1)
 	match _state:
 		IDLE:
 			if move_direction:
@@ -48,7 +50,7 @@ func _integrate_forces(state: Physics2DDirectBodyState) -> void:
 			if not move_direction:
 				change_state(IDLE)
 			if (grounded) and Input.is_action_just_pressed("ui_jump"):
-				state.apply_central_impulse( (get_linear_velocity().normalized()*0.3 + (get_position() - planets[0].get_position()).normalized()) *jump_force)
+				state.apply_central_impulse(get_linear_velocity().normalized()*jump_force/2 + (gravity*jump_force))
 				timer.start()
 				change_state(JUMP)
 				#current grounded is unreliable
@@ -72,11 +74,15 @@ func enter_state() -> void:
 		IDLE:
 			animator.play("Idle")
 		RUN:
+			shadow.set_visible(true)
+			shadow.play("default")
 			animator.play("Walking")
+		JUMP:
+			shadow.set_visible(false)
 
-func get_move_direction() -> Vector2:
-	return (get_position() - planets[0].get_position()).normalized().tangent() * (
-			-Input.get_action_strength("ui_right") + Input.get_action_strength("ui_left"))
+func get_move_direction(gravity) -> Vector2:
+	return (gravity.tangent() * (
+			-Input.get_action_strength("ui_right") + Input.get_action_strength("ui_left")))
 
 func set_flip() -> void:
 	if Input.is_action_pressed("ui_left"):

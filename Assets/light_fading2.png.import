@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light-export.png-4448faa7a1535cac73a95a5e2a918ada.stex"
+path="res://.import/light_fading2.png-3091a2c0d8cbf122fec9d298493c9919.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/light-export.png"
-dest_files=[ "res://.import/light-export.png-4448faa7a1535cac73a95a5e2a918ada.stex" ]
+source_file="res://Assets/light_fading2.png"
+dest_files=[ "res://.import/light_fading2.png-3091a2c0d8cbf122fec9d298493c9919.stex" ]
 
 [params]
 
