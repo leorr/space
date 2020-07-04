@@ -1,16 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/planet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Gravity.gd" type="Script" id=2]
 [ext_resource path="res://Assets/light.png" type="Texture" id=3]
 
-
 [sub_resource type="PhysicsMaterial" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 906.744
+radius = 913.326
 
 [sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( 58.116, -894.14, 184.954, -872.813, 357.813, -821.18, 501.489, -739.24, 608.123, -655.056, 751.798, -484.441, 853.942, -268.929, 889.86, -61.2733, 884.248, 114.953, 855.064, 257.506, 812.451, 364.084, 760.777, 465.161, 692.307, 565.06, 618.224, 644.755, 539.652, 708.735, 450.978, 771.593, 376.895, 809.757, 250.057, 859.145, 147.913, 879.349, 70.4629, 886.084, -32.8036, 891.697, -132.703, 880.472, -255.051, 853.533, -360.563, 814.247, -459.339, 764.858, -564.851, 684.041, -651.28, 609.959, -760.159, 470.773, -820.772, 348.425, -866.793, 209.24, -881.385, 128.422, -891.487, 24.0334, -888.12, -62.3961, -881.385, -133.111, -865.671, -197.092, -842.099, -296.991, -787.098, -419.339, -739.955, -497.911, -668.117, -593.32, -540.156, -715.669, -439.135, -776.282, -295.46, -845.874, -124.845, -884.038 )
 
 [node name="Planet" type="RigidBody2D" groups=[
 "Planet",
@@ -18,6 +20,7 @@ radius = 906.744
 mode = 1
 mass = 65535.0
 physics_material_override = SubResource( 1 )
+linear_damp = 0.1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -35,15 +38,18 @@ gravity_point = true
 gravity_distance_scale = 0.01
 gravity_vec = Vector2( 0, 0 )
 gravity = 1024.0
+linear_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="Gravity_Area" type="CollisionShape2D" parent="Gravity"]
 show_behind_parent = true
+position = Vector2( 16.837, -33.6738 )
 scale = Vector2( 450, 450 )
 shape = SubResource( 3 )
 
 [node name="light-export" type="Sprite" parent="."]
-scale = Vector2( 6.2, 6.2 )
+modulate = Color( 1, 0.678431, 0.678431, 0.294118 )
+scale = Vector2( 12.656, 11.841 )
 z_index = 999
 z_as_relative = false
 texture = ExtResource( 3 )
@@ -53,6 +59,9 @@ scale = Vector2( 6.2, 6.2 )
 z_index = 4096
 z_as_relative = false
 texture = ExtResource( 3 )
-texture_scale = 2.0
+texture_scale = 2.12
 color = Color( 1, 0.67451, 0.356863, 1 )
-energy = 4.0
+energy = 5.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 4 )

@@ -24,21 +24,20 @@ absorbent = true
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "Walking",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Walking",
+"speed": 10.0
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=3]
-closed = false
 cull_mode = 2
-polygon = PoolVector2Array( -9.49192, -4.32569, -4.45948, -7.10678, 0.175674, -7.63651, 5.60542, -6.44461, 9.97571, -3.39865, 11.0352, 0.177032 )
+polygon = PoolVector2Array( -8.04441, 1.35618, -6.02775, -0.418018, -0.317446, -4.7131, 4.39343, -5.82242, 7.38625, -1.89749, 9.20814, 3.74789, 10.2112, 11.6544, 7.36575, 14.5756, -0.0375717, 16.7762, -3.97552, 14.912, -6.83095, 12.5767, -9.53118, 5.91849 )
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -50,9 +49,10 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=5]
 custom_solver_bias = 0.1
-radius = 8.0
+radius = 7.5
 
 [node name="Player" type="RigidBody2D"]
+position = Vector2( 0, 0.25 )
 mode = 2
 mass = 80.0
 physics_material_override = SubResource( 1 )
@@ -67,18 +67,22 @@ impulse_speed = 5000.0
 [node name="anim_player" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "Walking"
+frame = 5
 playing = true
-flip_h = true
 
 [node name="camera_2D" type="Camera2D" parent="."]
 rotating = true
 current = true
-zoom = Vector2( 0.5, 0.5 )
-limit_smoothed = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 smoothing_enabled = true
-smoothing_speed = 10.0
+drag_margin_left = 0.01
+drag_margin_top = 0.01
+drag_margin_right = 0.01
+drag_margin_bottom = 0.01
 
 [node name="occluder" type="LightOccluder2D" parent="."]
+position = Vector2( 0.371628, -0.0743256 )
 rotation = 0.187816
 z_index = -4096
 occluder = SubResource( 3 )

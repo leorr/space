@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/high_res_lightt.png" type="Texture" id=3]
+
+[node name="Sun" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.819608, 0, 0.0941176 )
+scale = Vector2( 45, 45 )
+texture = ExtResource( 3 )
+
+[node name="sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.28125, 0, 1 )
+show_behind_parent = true
+scale = Vector2( 20, 20 )
+texture = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 100, 100 )
+z_index = 4096
+z_as_relative = false
+texture = ExtResource( 3 )
+texture_scale = 0.86
+energy = 7.58
+range_z_min = -4096
+range_z_max = 4096
+shadow_enabled = true
+shadow_buffer_size = 16384
+shadow_gradient_length = 1.8

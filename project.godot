@@ -20,7 +20,6 @@ run/main_scene="res://Scenes/Test_Level.tscn"
 
 [debug]
 
-settings/fps/force_fps=60
 settings/stdout/print_fps=true
 
 [importer_defaults]

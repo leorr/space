@@ -1,36 +1,36 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Planet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Sun.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Lamp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/bg.png" type="Texture" id=5]
 
 [node name="Root" type="Node2D"]
-modulate = Color( 0.164706, 0.164706, 0.164706, 1 )
 
-[node name="Planet" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2650.4, -659.921 )
+[node name="Sun" parent="." instance=ExtResource( 3 )]
+show_behind_parent = true
+position = Vector2( -48793.1, -23715.4 )
+z_index = -2000
+
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color( 0.027451, 0.027451, 0.027451, 1 )
+
+[node name="Planet" parent="Node2D" instance=ExtResource( 1 )]
+position = Vector2( -32891.8, -42797.8 )
+z_index = -2000
+
+[node name="Player" parent="Node2D" instance=ExtResource( 2 )]
+position = Vector2( -32845.5, -43735.8 )
+
+[node name="Lamp" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( -32596.7, -43718.4 )
+rotation = 0.313729
+scale = Vector2( 2, 2 )
+
+[node name="bg" type="Sprite" parent="Node2D"]
+modulate = Color( 0.654902, 0.894118, 1, 0.298039 )
+position = Vector2( -32856.9, -42933.8 )
+scale = Vector2( 3, 3 )
 z_index = -4096
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-light_mask = 2
-position = Vector2( 2611.02, -1689.95 )
-impulse_speed = 4000.0
-
-[node name="Lamp" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2790.04, -1617.16 )
-z_index = -1000
-
-[node name="Lamp2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2651.04, -1629.16 )
-rotation = 0.0
-z_index = -1000
-
-[node name="Lamp3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 3049.39, -1543.73 )
-rotation = 0.386069
-z_index = -1000
-
-[node name="Lamp4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2916.04, -1592.16 )
-rotation = 0.267207
-z_index = -1000
+texture = ExtResource( 5 )
